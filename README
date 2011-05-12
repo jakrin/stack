@@ -1,0 +1,4 @@
+This is a simple stack.
+	1.Build
+To build library type: 
+$ scons
