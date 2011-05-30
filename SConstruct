@@ -6,7 +6,9 @@ VariantDir('build', 'src', duplicate=0)
 
 env = Environment(ENV=os.environ, tools=['mingw'])
 
-env.Program(['build/testcases.cpp'], LIBS = 'stack', LIBPATH = '.')
+env.AppendUnique(CCFLAGS = ['-g'])
+
+env.Program(['build/teststack.cpp'], LIBS = 'stack', LIBPATH = 'build')
 
 env.Library('build/stack', ['build/libstack/libstack.cpp'])
 

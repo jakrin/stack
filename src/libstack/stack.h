@@ -1,7 +1,10 @@
 
-struct stack;
+typedef struct {
+	int *s;
+    public:	int n;
+} stack;
 
-stack create();
-void del(stack st);
-void push(stack st, int x);
-int pop(stack st);
+void create(stack &st);
+void del(stack &st);
+void push(stack &st, int x);
+int pop(stack &st, int &t);
