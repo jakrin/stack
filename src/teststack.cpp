@@ -1,6 +1,9 @@
 #include "libstack/stack.h"
 #include <iostream>
 
+#define DBG(x) x
+//#define DBG(x)
+
 int test_create() {
 	//create stack
     stack s;
@@ -22,7 +25,7 @@ int test_push(stack &s, int x) {
     int k = s.n;
 	//push element 'x' into the stack 's'
     push(s, x);
-    std::cout << s.n <<  s.s[0] << std::endl;
+    DBG(std::cout << s.n <<  s.s[0] << std::endl;)
     //check if we pushed 'x' into the stack and increased 'n' by 1
     if (s.s[s.n - 1] == x && k == s.n - 1) return 0;
     else return 1;
@@ -39,6 +42,23 @@ int test_pop(stack &s) {
     
 }
 
+
+int test_push_pop(int k) {
+    stack s;
+    create(s);
+    for (int i = 0; i < k; i++ ) {
+        push(s, (i + 1) * 2);
+        DBG(std::cout << s.s[s.n-1]  << std::endl;)
+    }
+    
+    DBG(std::cout << "stack:" << std::endl;)
+    int t;
+    for (int j = stack_size - 1; j >= 0; j--) {
+        pop(s, t);
+        DBG(std::cout << t << std::endl;)
+        if (t != (j + 1) * 2) return 1;
+    }
+}
 int main() {
     using namespace std;
     int c = 0;
@@ -54,6 +74,7 @@ int main() {
     std::cout << "pop stack test: " << ((c == 0) ? "PASSED" : "FAILED") << std::endl; 
     c += test_del(st);
     std::cout << "del stack test: " << ((c == 0) ? "PASSED" : "FAILED") << std::endl; 
-    if (c == 0) return 0;
-    else return 1;
+    c += test_push_pop(20);
+    std::cout << "batch push/pop stack test:" << ((c == 0) ? "PASSED" : "FAILED") << std::endl;
+    return c;
 }

@@ -1,11 +1,14 @@
 #include <iostream>
+
+int stack_size = 10;
+
 typedef struct {
 	int *s;
     public:	int n;
 } stack;
 
 void create(stack &st){
-    st.s = new int[10];
+    st.s = new int[stack_size];
 	st.n = 0;
 }
 
@@ -16,7 +19,7 @@ void del(stack &st){
 }
 
 int push(stack &st, int x) {
-    if (st.n >= 10) return 1;
+    if (st.n >= stack_size) return 1;
     st.s[st.n] = x;
     st.n++;
     return 0;
